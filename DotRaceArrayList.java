@@ -46,8 +46,8 @@ public class DotRaceArrayList extends JPanel {
       int k = 0;
       while (k < racerCount) {
          Dot aDotObject = new Dot(randomName(), k, randomColor(), defaultDiameter);
-         // FINISH THIS -- insert the Dot object to the dots ArrayList
-
+         dots.add(aDotObject);
+         k++;
       }
    }
 
@@ -70,9 +70,14 @@ public class DotRaceArrayList extends JPanel {
    }
 
    public double distanceWon(Dot winner){
-       //FINISH THIS: loop over dots list...
-       //find the second place Dot
-       // subtract the winner distance from second place      
+      Dot second = dots.get(0);
+      if(second == winner)
+         second = dots.get(1);
+      for (Dot d: dots){
+         if(d.getDistance() > second.getDistance() && d != winner)
+            second = d;
+      }
+      return winner.getDistance() - second.getDistance(); 
 
    }
    
@@ -80,6 +85,7 @@ public class DotRaceArrayList extends JPanel {
    private Dot whoMoves() {
       int d = randGen.nextInt(dots.size()); // a number between 0 and one less than the number of dots
       // FINISH THIS: return the Dot pointed to by 'd'
+      return dots.get(d);
  
    }
    
@@ -116,7 +122,9 @@ public class DotRaceArrayList extends JPanel {
    // Draw all of the Dot objects
    public void drawRacers(Graphics g) {
       // FINISH THIS -- call drawRacer() for each Dot in dots
-      
+      for(int i=0; i < dots.size(); i++){
+         drawRacer(dots.get(i),g);
+      }
    }
 
    public void drawRacer(Dot racer, Graphics g) {
@@ -137,29 +145,29 @@ public class DotRaceArrayList extends JPanel {
          // this is a simple way of initializing an ArrayList in Java, but not
          // something you need to know for this course.
          // These are names of real race horses, as reported by 'the internet'.
-         add("dulcify");
-         add("whirlaway");
-         add("gumshoe");
-         add("skipteaser");
-         add("kissed by a fish");
-         add("rakatack");
-         add("viscosity");
-         add("flattermeforever");
-         add("sonneteer");
-         add("cigar starter");
-         add("flat out fast");
-         add("gothic soldier");
-         add("sexy librarian");
-         add("fishy advice");
-         add("motel princess");
-         add("lunatique");
-         add("panicking petunia");
-         add("wingspan");
-         add("southern missle");
-         add("excessive moves");
-         add("paul bunyans axe");
-         add("a storm it is");
-         add("dawn of war");
+         add("progesterone");
+         add("estrodial");
+         add("spirinoloctane");
+         add("prog");
+         add("E");
+         add("femtanyl");
+         add("the blue pill");
+         add("skirt go spinnnnnny");
+         add("anti-boyotics");
+         add("spiro");
+         add("sans tresbian lex");
+         add("antibabypillen");
+         add("telling the police 'I swear officer I never would never shoot my husband' in a skimpy red dress");
+         add("puppygirl");
+         add("annania");
+         add("OT");
+         add("smoking das bloont");
+         add("cuntenserven");
+         add("yaoi boy");
+         add("fujoshi to tboy pipeline");
+         add("Wikipedi's list of Individual dogs");
+         add("frotdog");
+         add("se transvetigating mine hotdog");
       }
    };
 
@@ -183,11 +191,14 @@ public class DotRaceArrayList extends JPanel {
          add(Color.pink);
       }
    };
-
+   ArrayList<Color> taken = new ArrayList<Color>();
    // returns a random element from the someColors ArrayList
    public Color randomColor() {
-       //FINISH THIS: MAKE SURE IT NEVER REPEATS until all used
-      return someColors.get(randGen.nextInt(someColors.size()));
+      Color c =someColors.get(randGen.nextInt(someColors.size()));
+      while(taken.contains(c))
+         c = someColors.get(randGen.nextInt(someColors.size()));
+      taken.add(c);
+      return c;
    }
 
    
@@ -203,5 +214,10 @@ public class DotRaceArrayList extends JPanel {
          ex.printStackTrace();
       }
    }
+
+   public static void main(String[] args) {
+        DotRaceArrayList d= new DotRaceArrayList();
+        d.runRace();
+    }
 
 } // end DotRace
