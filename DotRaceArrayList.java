@@ -73,7 +73,7 @@ public class DotRaceArrayList extends JPanel {
        //FINISH THIS: loop over dots list...
        //find the second place Dot
        // subtract the winner distance from second place      
-   
+
    }
    
    // This method returns the 'Dot' whose turn it is to move.

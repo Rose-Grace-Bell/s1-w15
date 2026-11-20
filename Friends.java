@@ -3,6 +3,8 @@ import java.util.*;
 // a middle name, and a last name.
 
 public class Friends {
+    ArrayList<String> friends ;
+    friends = new ArrayList<String>();
 
    // declare and initialize the ArrayList
    // declare and initialize the Random class
